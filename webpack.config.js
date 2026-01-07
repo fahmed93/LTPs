@@ -15,22 +15,29 @@ module.exports = {
       'react-native$': 'react-native-web',
     },
     extensions: ['.web.js', '.js', '.web.ts', '.ts', '.web.tsx', '.tsx', '.json'],
+    mainFields: ['browser', 'module', 'main'],
   },
   module: {
     rules: [
       {
         test: /\.(js|jsx|ts|tsx)$/,
-        exclude: /node_modules\/(?!(@react-native|react-native))/,
+        exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
           options: {
             presets: [
-              '@babel/preset-env',
+              ['@babel/preset-env', { modules: false }],
               ['@babel/preset-react', { runtime: 'automatic' }],
               '@babel/preset-typescript',
               '@react-native/babel-preset',
             ],
           },
+        },
+      },
+      {
+        test: /\.m?js$/,
+        resolve: {
+          fullySpecified: false,
         },
       },
     ],
