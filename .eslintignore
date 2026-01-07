@@ -4,3 +4,4 @@ android/
 ios/
 coverage/
 .bundle/
+package-lock.json

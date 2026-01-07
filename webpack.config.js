@@ -1,12 +1,14 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
+const publicPath = process.env.PUBLIC_PATH || '/LTPs/';
+
 module.exports = {
   entry: './index.web.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
-    publicPath: '/LTPs/',
+    publicPath: publicPath,
   },
   resolve: {
     alias: {

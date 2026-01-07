@@ -12,7 +12,6 @@
     "build:web": "webpack --config webpack.config.js --mode production"
   },
   "dependencies": {
-    "@react-native/new-app-screen": "0.83.1",
     "react": "19.2.0",
     "react-dom": "19.2.0",
     "react-native": "0.83.1",

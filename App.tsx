@@ -19,6 +19,20 @@ import {
   useSafeAreaInsets,
 } from 'react-native-safe-area-context';
 
+// Theme colors
+const COLORS = {
+  light: {
+    background: '#f5f5f5',
+    text: '#000000',
+    cardBackground: 'rgba(100, 150, 250, 0.1)',
+  },
+  dark: {
+    background: '#1a1a1a',
+    text: '#ffffff',
+    cardBackground: 'rgba(100, 150, 250, 0.1)',
+  },
+};
+
 function App() {
   const isDarkMode = useColorScheme() === 'dark';
 
@@ -32,14 +46,15 @@ function App() {
 
 function AppContent({ isDarkMode }: { isDarkMode: boolean }) {
   const safeAreaInsets = useSafeAreaInsets();
+  const theme = isDarkMode ? COLORS.dark : COLORS.light;
 
   const backgroundStyle = {
-    backgroundColor: isDarkMode ? '#1a1a1a' : '#f5f5f5',
+    backgroundColor: theme.background,
     flex: 1,
   };
 
   const textStyle = {
-    color: isDarkMode ? '#ffffff' : '#000000',
+    color: theme.text,
   };
 
   return (
@@ -61,7 +76,7 @@ function AppContent({ isDarkMode }: { isDarkMode: boolean }) {
           <View style={styles.featuresContainer}>
             <Text style={[styles.sectionTitle, textStyle]}>Features</Text>
 
-            <View style={styles.featureCard}>
+            <View style={[styles.featureCard, { backgroundColor: theme.cardBackground }]}>
               <Text style={styles.featureIcon}>📖</Text>
               <Text style={[styles.featureTitle, textStyle]}>
                 Shared Recipe Lists
@@ -71,7 +86,7 @@ function AppContent({ isDarkMode }: { isDarkMode: boolean }) {
               </Text>
             </View>
 
-            <View style={styles.featureCard}>
+            <View style={[styles.featureCard, { backgroundColor: theme.cardBackground }]}>
               <Text style={styles.featureIcon}>🛒</Text>
               <Text style={[styles.featureTitle, textStyle]}>
                 Grocery List
@@ -81,7 +96,7 @@ function AppContent({ isDarkMode }: { isDarkMode: boolean }) {
               </Text>
             </View>
 
-            <View style={styles.featureCard}>
+            <View style={[styles.featureCard, { backgroundColor: theme.cardBackground }]}>
               <Text style={styles.featureIcon}>✈️</Text>
               <Text style={[styles.featureTitle, textStyle]}>
                 Travel Plans & Memories
@@ -91,7 +106,7 @@ function AppContent({ isDarkMode }: { isDarkMode: boolean }) {
               </Text>
             </View>
 
-            <View style={styles.featureCard}>
+            <View style={[styles.featureCard, { backgroundColor: theme.cardBackground }]}>
               <Text style={styles.featureIcon}>🏠</Text>
               <Text style={[styles.featureTitle, textStyle]}>
                 Home Projects
@@ -140,7 +155,6 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   featureCard: {
-    backgroundColor: 'rgba(100, 150, 250, 0.1)',
     borderRadius: 12,
     padding: 20,
     marginBottom: 16,
