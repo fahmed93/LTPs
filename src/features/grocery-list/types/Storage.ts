@@ -34,16 +34,6 @@ export interface IGroceryStorageService {
 }
 
 /**
- * Storage key constants
- */
-export const STORAGE_KEYS = {
-  /**
-   * Key for storing the grocery list in AsyncStorage
-   */
-  GROCERY_LIST: '@grocery_list',
-} as const;
-
-/**
  * Storage error types
  */
 export enum StorageErrorType {

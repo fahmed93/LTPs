@@ -86,6 +86,7 @@ export function useGroceryList(initialList?: GroceryList): UseGroceryListReturn 
    * @returns Number of items removed
    */
   const clearCheckedItems = useCallback((): number => {
+    // Read current items to calculate removed count
     const currentItems = list.items;
     const uncheckedItems = currentItems.filter(item => !item.checked);
     const removedCount = currentItems.length - uncheckedItems.length;
