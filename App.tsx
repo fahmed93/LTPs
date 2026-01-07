@@ -5,7 +5,7 @@
  * @format
  */
 
-import React from 'react';
+import React, {useState} from 'react';
 import {
   StatusBar,
   StyleSheet,
@@ -13,38 +13,32 @@ import {
   View,
   useColorScheme,
   ScrollView,
+  Pressable,
 } from 'react-native';
 import {
   SafeAreaProvider,
   useSafeAreaInsets,
 } from 'react-native-safe-area-context';
-
-// Theme colors
-const COLORS = {
-  light: {
-    background: '#f5f5f5',
-    text: '#000000',
-    cardBackground: 'rgba(100, 150, 250, 0.1)',
-  },
-  dark: {
-    background: '#1a1a1a',
-    text: '#ffffff',
-    cardBackground: 'rgba(100, 150, 250, 0.1)',
-  },
-};
+import {COLORS} from './src/theme/colors';
+import {GroceryListScreen} from './src/features/grocery-list/components/GroceryListScreen';
 
 function App() {
   const isDarkMode = useColorScheme() === 'dark';
+  const [currentScreen, setCurrentScreen] = useState<'home' | 'groceryList'>('home');
 
   return (
     <SafeAreaProvider>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <AppContent isDarkMode={isDarkMode} />
+      {currentScreen === 'home' ? (
+        <AppContent isDarkMode={isDarkMode} onNavigateToGroceryList={() => setCurrentScreen('groceryList')} />
+      ) : (
+        <GroceryListScreen />
+      )}
     </SafeAreaProvider>
   );
 }
 
-function AppContent({ isDarkMode }: { isDarkMode: boolean }) {
+function AppContent({ isDarkMode, onNavigateToGroceryList }: { isDarkMode: boolean; onNavigateToGroceryList: () => void }) {
   const safeAreaInsets = useSafeAreaInsets();
   const theme = isDarkMode ? COLORS.dark : COLORS.light;
 
@@ -86,7 +80,9 @@ function AppContent({ isDarkMode }: { isDarkMode: boolean }) {
               </Text>
             </View>
 
-            <View style={[styles.featureCard, { backgroundColor: theme.cardBackground }]}>
+            <Pressable 
+              style={[styles.featureCard, { backgroundColor: theme.cardBackground }]}
+              onPress={onNavigateToGroceryList}>
               <Text style={styles.featureIcon}>🛒</Text>
               <Text style={[styles.featureTitle, textStyle]}>
                 Grocery List
@@ -94,7 +90,10 @@ function AppContent({ isDarkMode }: { isDarkMode: boolean }) {
               <Text style={[styles.featureDescription, textStyle]}>
                 Collaborative shopping lists that sync in real-time
               </Text>
-            </View>
+              <Text style={[styles.tapHint, {color: theme.text}]}>
+                Tap to open →
+              </Text>
+            </Pressable>
 
             <View style={[styles.featureCard, { backgroundColor: theme.cardBackground }]}>
               <Text style={styles.featureIcon}>✈️</Text>
@@ -171,6 +170,12 @@ const styles = StyleSheet.create({
   featureDescription: {
     fontSize: 14,
     opacity: 0.8,
+  },
+  tapHint: {
+    fontSize: 12,
+    fontWeight: '600',
+    marginTop: 8,
+    opacity: 0.6,
   },
 });
 
