@@ -7,7 +7,6 @@ import {
   isValidItemName,
   trimItemName,
   MAX_ITEM_NAME_LENGTH,
-  MIN_ITEM_NAME_LENGTH,
 } from '../../../../src/features/grocery-list/utils/itemValidation';
 
 describe('itemValidation', () => {

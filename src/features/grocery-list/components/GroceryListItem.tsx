@@ -35,7 +35,6 @@ export interface GroceryListItemProps {
 export function GroceryListItem({
   item,
   onToggle,
-  onDelete,
 }: GroceryListItemProps): React.JSX.Element {
   const colorScheme = useColorScheme();
   const theme = COLORS[colorScheme ?? 'light'];

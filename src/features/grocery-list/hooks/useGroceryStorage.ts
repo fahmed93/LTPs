@@ -3,10 +3,10 @@
  * Handles loading and saving to AsyncStorage
  */
 
-import {useEffect, useState, useCallback} from 'react';
-import {GroceryList, createEmptyGroceryList} from '../types/GroceryList';
+import {useState, useCallback} from 'react';
+import {GroceryList} from '../types/GroceryList';
 import {groceryStorageService} from '../services/groceryStorageService';
-import {StorageError, StorageErrorType} from '../types/Storage';
+import {StorageError} from '../types/Storage';
 
 /**
  * Hook return type

@@ -5,7 +5,7 @@
 
 import {useState, useCallback} from 'react';
 import {GroceryItem, createGroceryItem} from '../types/GroceryItem';
-import {GroceryList, createEmptyGroceryList, ClearCheckedResult} from '../types/GroceryList';
+import {GroceryList, createEmptyGroceryList} from '../types/GroceryList';
 
 /**
  * Hook return type

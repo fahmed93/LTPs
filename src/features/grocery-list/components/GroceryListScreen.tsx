@@ -37,7 +37,7 @@ export function GroceryListScreen(): React.JSX.Element {
   const theme = COLORS[colorScheme ?? 'light'];
   
   const {items, addItem, toggleItem, removeItem, setList, list} = useGroceryList();
-  const {loading, error, loadList, saveList, clearError} = useGroceryStorage();
+  const {loading, error, loadList, saveList} = useGroceryStorage();
   const [isHydrated, setIsHydrated] = useState(false);
 
   /**
@@ -105,7 +105,7 @@ export function GroceryListScreen(): React.JSX.Element {
       <View style={styles.header}>
         <Text style={[styles.title, {color: theme.text}]}>Grocery List</Text>
         {error && (
-          <Text style={[styles.errorText, {color: '#ff3b30'}]}>
+          <Text style={styles.errorText}>
             Storage error - changes may not be saved
           </Text>
         )}
@@ -155,6 +155,7 @@ const styles = StyleSheet.create({
   errorText: {
     fontSize: 12,
     marginTop: 4,
+    color: '#ff3b30',
   },
   loadingContainer: {
     flex: 1,
