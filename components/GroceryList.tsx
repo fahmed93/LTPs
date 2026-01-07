@@ -54,7 +54,7 @@ export function GroceryList({ isDarkMode }: GroceryListProps) {
     if (newItemName.trim() === '') return;
 
     const newItem: GroceryItemType = {
-      id: Date.now().toString(),
+      id: `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
       name: newItemName.trim(),
       checked: false,
     };
@@ -293,7 +293,6 @@ const styles = StyleSheet.create({
   inputContainer: {
     flexDirection: 'row',
     marginBottom: 20,
-    gap: 10,
   },
   input: {
     flex: 1,
@@ -302,6 +301,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     paddingVertical: 10,
     fontSize: 16,
+    marginRight: 10,
   },
   addButton: {
     borderRadius: 8,
@@ -373,13 +373,13 @@ const styles = StyleSheet.create({
   },
   itemActions: {
     flexDirection: 'row',
-    gap: 8,
   },
   actionButton: {
     borderRadius: 6,
     paddingHorizontal: 12,
     paddingVertical: 6,
     justifyContent: 'center',
+    marginLeft: 8,
   },
   deleteButton: {
     backgroundColor: '#e74c3c',
@@ -452,12 +452,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-end',
     marginTop: 24,
-    gap: 12,
   },
   modalButton: {
     borderRadius: 8,
     paddingHorizontal: 20,
     paddingVertical: 10,
+    marginLeft: 12,
   },
   cancelButton: {
     backgroundColor: '#95a5a6',
