@@ -2,16 +2,18 @@
  * Main screen component for the grocery list feature
  */
 
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   FlatList,
   StyleSheet,
   useColorScheme,
   Text,
+  ActivityIndicator,
 } from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {useGroceryList} from '../hooks/useGroceryList';
+import {useGroceryStorage} from '../hooks/useGroceryStorage';
 import {GroceryListInput} from './GroceryListInput';
 import {GroceryListItem} from './GroceryListItem';
 import {GroceryItem} from '../types/GroceryItem';
@@ -34,7 +36,33 @@ export function GroceryListScreen(): React.JSX.Element {
   const colorScheme = useColorScheme();
   const theme = COLORS[colorScheme ?? 'light'];
   
-  const {items, addItem, toggleItem, removeItem} = useGroceryList();
+  const {items, addItem, toggleItem, removeItem, setList, list} = useGroceryList();
+  const {loading, error, loadList, saveList, clearError} = useGroceryStorage();
+  const [isHydrated, setIsHydrated] = useState(false);
+
+  /**
+   * Load data from storage on mount
+   */
+  useEffect(() => {
+    const hydrate = async () => {
+      const storedList = await loadList();
+      if (storedList) {
+        setList(storedList);
+      }
+      setIsHydrated(true);
+    };
+    
+    hydrate();
+  }, [loadList, setList]);
+
+  /**
+   * Auto-save to storage whenever list changes (after hydration)
+   */
+  useEffect(() => {
+    if (isHydrated) {
+      saveList(list);
+    }
+  }, [list, saveList, isHydrated]);
 
   /**
    * Render a single grocery item
@@ -76,22 +104,38 @@ export function GroceryListScreen(): React.JSX.Element {
     <SafeAreaView style={[styles.container, {backgroundColor: theme.background}]}>
       <View style={styles.header}>
         <Text style={[styles.title, {color: theme.text}]}>Grocery List</Text>
+        {error && (
+          <Text style={[styles.errorText, {color: '#ff3b30'}]}>
+            Storage error - changes may not be saved
+          </Text>
+        )}
       </View>
       
-      <GroceryListInput onAddItem={addItem} />
-      
-      <FlatList
-        data={items}
-        renderItem={renderItem}
-        keyExtractor={keyExtractor}
-        getItemLayout={getItemLayout}
-        removeClippedSubviews={true}
-        maxToRenderPerBatch={10}
-        windowSize={21}
-        initialNumToRender={15}
-        ListEmptyComponent={renderEmptyComponent}
-        style={[styles.list, {backgroundColor: theme.background}]}
-      />
+      {loading && !isHydrated ? (
+        <View style={styles.loadingContainer}>
+          <ActivityIndicator size="large" color={theme.text} />
+          <Text style={[styles.loadingText, {color: theme.text}]}>
+            Loading...
+          </Text>
+        </View>
+      ) : (
+        <>
+          <GroceryListInput onAddItem={addItem} />
+          
+          <FlatList
+            data={items}
+            renderItem={renderItem}
+            keyExtractor={keyExtractor}
+            getItemLayout={getItemLayout}
+            removeClippedSubviews={true}
+            maxToRenderPerBatch={10}
+            windowSize={21}
+            initialNumToRender={15}
+            ListEmptyComponent={renderEmptyComponent}
+            style={[styles.list, {backgroundColor: theme.background}]}
+          />
+        </>
+      )}
     </SafeAreaView>
   );
 }
@@ -107,6 +151,19 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 28,
     fontWeight: '600',
+  },
+  errorText: {
+    fontSize: 12,
+    marginTop: 4,
+  },
+  loadingContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  loadingText: {
+    marginTop: 12,
+    fontSize: 16,
   },
   list: {
     flex: 1,
