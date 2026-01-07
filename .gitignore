@@ -43,6 +43,7 @@ yarn-error.log
 
 # Web build
 dist/
+dist-preview/
 
 # fastlane
 #
