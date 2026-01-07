@@ -5,6 +5,16 @@
 **Status**: Draft  
 **Input**: User description: "Create a sidebar to handle navigation. The sidebar should open and close on the left. The sidebar should have all features in order and open each one (recipes, grocery list, etc). The sidebar should be accessible from every feature page."
 
+## Clarifications
+
+### Session 2026-01-07
+
+- Q: What is the exact opacity value for the backdrop overlay to ensure consistency and proper contrast? → A: 40% opacity (0.4) - Standard drawer overlay recommended by Material Design
+- Q: What specific visual treatment should be used to highlight the active/current feature in the sidebar? → A: Background highlight + bold text - Strong visual indicator, accessible
+- Q: What specific content and layout should the sidebar header contain? → A: App name "LTPs" + emoji logo (🌱) + subtitle "Long Term Plans"
+- Q: What should happen when a user taps the backdrop or menu button while the sidebar is currently animating? → A: Ignore all input until current animation completes
+- Q: How should the sidebar track the current active screen before a navigation library is selected and implemented? → A: Use React state in App.tsx with prop drilling - Simple, no dependencies, easily migrated later
+
 ## User Scenarios & Testing *(mandatory)*
 
 ### User Story 1 - Open Sidebar from Any Screen (Priority: P1)
@@ -91,12 +101,12 @@ As a user, I want the sidebar to automatically match my device's light or dark t
 
 ### Edge Cases
 
-- What happens when the sidebar is opened on a very small screen (< 320px width)?
-- How does the sidebar handle screen orientation changes (portrait to landscape)?
-- What happens if a user rapidly taps the menu button multiple times?
-- How does the sidebar behave when the app is in split-screen mode on tablets?
-- What happens if a user tries to swipe the sidebar open/closed while an animation is in progress?
-- How does the sidebar handle very long feature names that might not fit?
+- What happens when the sidebar is opened on a very small screen (< 320px width)? - Sidebar will use minimum width of 240px as specified in FR-016
+- How does the sidebar handle screen orientation changes (portrait to landscape)? - Sidebar will recalculate width based on new screen dimensions (80% up to max 320px)
+- What happens if a user rapidly taps the menu button multiple times? - All inputs are ignored while animation is in progress (FR-014)
+- How does the sidebar behave when the app is in split-screen mode on tablets? - Sidebar width calculation is based on available screen width, maintaining 80% rule with 320px max
+- What happens if a user tries to swipe the sidebar open/closed while an animation is in progress? - Swipe gestures are ignored until animation completes (FR-014)
+- How does the sidebar handle very long feature names that might not fit? - Feature names should be kept short; if needed, text will truncate with ellipsis (...) to maintain layout
 
 ## Requirements *(mandatory)*
 
@@ -112,15 +122,15 @@ As a user, I want the sidebar to automatically match my device's light or dark t
 - **FR-008**: System MUST close the sidebar when the user swipes it to the left (mobile platforms only)
 - **FR-009**: System MUST close the sidebar when the Android back button is pressed (without affecting navigation history)
 - **FR-010**: System MUST close the sidebar when the Escape key is pressed (web platform only)
-- **FR-011**: System MUST visually highlight the currently active feature in the sidebar
+- **FR-011**: System MUST visually highlight the currently active feature in the sidebar using a background highlight color combined with bold text weight
 - **FR-012**: System MUST support both light and dark color schemes using the COLORS constant
 - **FR-013**: System MUST respect safe area insets on all sides of the sidebar
-- **FR-014**: System MUST prevent multiple simultaneous sidebar open/close animations
+- **FR-014**: System MUST prevent multiple simultaneous sidebar open/close animations by ignoring all user input (menu button, backdrop taps, swipe gestures) while an animation is in progress
 - **FR-015**: System MUST maintain accessibility: all sidebar items must be keyboard navigable and screen-reader friendly
 - **FR-016**: Sidebar MUST have a minimum width of 240px and maximum width of 320px
 - **FR-017**: Each feature item in the sidebar MUST have a minimum 44x44pt touch target
 - **FR-018**: System MUST display an icon or emoji next to each feature name for visual recognition
-- **FR-019**: Sidebar MUST include app branding (LTPs logo/name) at the top
+- **FR-019**: Sidebar MUST include app branding header at the top containing: emoji logo (🌱), app name "LTPs", and subtitle "Long Term Plans"
 - **FR-020**: System MUST persist sidebar state (open/closed) when the app is backgrounded and restored (within same session)
 
 ### Non-Functional Requirements
@@ -130,7 +140,7 @@ As a user, I want the sidebar to automatically match my device's light or dark t
 - **NFR-003**: Opening/closing the sidebar MUST complete within 300ms
 - **NFR-004**: Sidebar width MUST be 80% of screen width on mobile (max 320px), 280px fixed on tablets/web
 - **NFR-005**: Sidebar MUST work offline (no network dependency)
-- **NFR-006**: Sidebar backdrop MUST be semi-transparent (allowing the underlying screen to remain partially visible)
+- **NFR-006**: Sidebar backdrop MUST be semi-transparent with 40% opacity (0.4 alpha value) allowing the underlying screen to remain partially visible
 
 ### Key Entities *(include if feature involves data)*
 
@@ -162,9 +172,9 @@ The navigation sidebar feature is successful when:
 
 ## Assumptions *(mandatory)*
 
-1. The app currently has basic navigation state management (can track current screen)
+1. The app currently has basic navigation state management (can track current screen via React state in App.tsx) which can be extended with prop drilling until a navigation library is selected
 2. The app will initially support 5 features: Home, Recipes, Grocery List, Travel, Home Projects
-3. React Navigation or similar library will be used for screen navigation (to be decided in planning phase)
+3. React Navigation or similar library will be used for screen navigation (to be decided in planning phase); current state-based navigation is interim solution
 4. The COLORS constant from `src/theme/colors.ts` includes all necessary colors for the sidebar (background, text, highlight, overlay)
 5. Mobile platforms support gesture-based interactions (swipe to close)
 6. Web platform supports keyboard interactions (Escape key to close)
