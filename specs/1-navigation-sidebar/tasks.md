@@ -68,12 +68,12 @@
 
 ### Implementation for User Story 1 & 2
 
-- [ ] T015 [P] [US1] Implement `src/features/navigation/hooks/useSidebarAnimation.ts` custom hook (manage position/opacity Animated.Values, openSidebar/closeSidebar functions, isAnimating flag, 300ms timing)
-- [ ] T016 [P] [US1] Create `src/features/navigation/components/SidebarHeader.tsx` component (display 🌱 + "LTPs" + "Long Term Plans", theme-aware styling, safe area support)
-- [ ] T017 [P] [US2] Create `src/features/navigation/components/SidebarItem.tsx` component (display icon + name, handle press, 44x44pt touch target, React.memo optimization, theme support)
-- [ ] T018 [US1] Create `src/features/navigation/components/NavigationSidebar.tsx` main container (integrate useSidebarAnimation hook, render SidebarHeader, map NAVIGATION_ITEMS to SidebarItem components, SafeAreaView, theme integration)
-- [ ] T019 [US2] Update `App.tsx` to integrate NavigationSidebar (add isSidebarOpen state, add currentScreen state tracking, add onNavigate handler, add hamburger menu button, pass props to NavigationSidebar)
-- [ ] T020 [US2] Create placeholder screen components (Recipes, Travel, Home Projects) in `src/features/` with hamburger menu buttons and proper theming
+- [X] T015 [P] [US1] Implement `src/features/navigation/hooks/useSidebarAnimation.ts` custom hook (manage position/opacity Animated.Values, openSidebar/closeSidebar functions, isAnimating flag, 300ms timing)
+- [X] T016 [P] [US1] Create `src/features/navigation/components/SidebarHeader.tsx` component (display 🌱 + "LTPs" + "Long Term Plans", theme-aware styling, safe area support)
+- [X] T017 [P] [US2] Create `src/features/navigation/components/SidebarItem.tsx` component (display icon + name, handle press, 44x44pt touch target, React.memo optimization, theme support)
+- [X] T018 [US1] Create `src/features/navigation/components/NavigationSidebar.tsx` main container (integrate useSidebarAnimation hook, render SidebarHeader, map NAVIGATION_ITEMS to SidebarItem components, SafeAreaView, theme integration)
+- [X] T019 [US2] Update `App.tsx` to integrate NavigationSidebar (add isSidebarOpen state, add currentScreen state tracking, add onNavigate handler, add hamburger menu button, pass props to NavigationSidebar)
+- [X] T020 [US2] Create placeholder screen components (Recipes, Travel, Home Projects) in `src/features/` with hamburger menu buttons and proper theming
 
 **Checkpoint**: MVP Complete! Users can open sidebar and navigate between all 5 features. Sidebar closes automatically after navigation.
 
