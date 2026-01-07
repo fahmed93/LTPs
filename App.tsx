@@ -18,20 +18,7 @@ import {
   SafeAreaProvider,
   useSafeAreaInsets,
 } from 'react-native-safe-area-context';
-
-// Theme colors
-const COLORS = {
-  light: {
-    background: '#f5f5f5',
-    text: '#000000',
-    cardBackground: 'rgba(100, 150, 250, 0.1)',
-  },
-  dark: {
-    background: '#1a1a1a',
-    text: '#ffffff',
-    cardBackground: 'rgba(100, 150, 250, 0.1)',
-  },
-};
+import {COLORS} from './src/theme/colors';
 
 function App() {
   const isDarkMode = useColorScheme() === 'dark';
