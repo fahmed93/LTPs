@@ -10,6 +10,7 @@ import {
   useColorScheme,
   Text,
   ActivityIndicator,
+  TouchableOpacity,
 } from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {useGroceryList} from '../hooks/useGroceryList';
@@ -24,6 +25,11 @@ import {COLORS} from '../../../theme/colors';
  */
 const ITEM_HEIGHT = 60;
 
+interface GroceryListScreenProps {
+  /** Callback to open the navigation sidebar */
+  onOpenSidebar?: () => void;
+}
+
 /**
  * Main grocery list screen component
  * Features:
@@ -32,7 +38,9 @@ const ITEM_HEIGHT = 60;
  * - Empty state when no items
  * - Theme-aware styling
  */
-export function GroceryListScreen(): React.JSX.Element {
+export function GroceryListScreen({
+  onOpenSidebar,
+}: GroceryListScreenProps): React.JSX.Element {
   const colorScheme = useColorScheme();
   const theme = COLORS[colorScheme ?? 'light'];
   
@@ -103,6 +111,15 @@ export function GroceryListScreen(): React.JSX.Element {
   return (
     <SafeAreaView style={[styles.container, {backgroundColor: theme.background}]}>
       <View style={styles.header}>
+        {onOpenSidebar && (
+          <TouchableOpacity
+            onPress={onOpenSidebar}
+            style={styles.hamburgerButton}
+            accessibilityLabel="Open navigation menu"
+            accessibilityRole="button">
+            <Text style={[styles.hamburgerIcon, {color: theme.text}]}>☰</Text>
+          </TouchableOpacity>
+        )}
         <Text style={[styles.title, {color: theme.text}]}>Grocery List</Text>
         {error && (
           <Text style={styles.errorText}>
@@ -147,6 +164,19 @@ const styles = StyleSheet.create({
   header: {
     paddingHorizontal: 16,
     paddingVertical: 16,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  hamburgerButton: {
+    width: 44,
+    height: 44,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 8,
+  },
+  hamburgerIcon: {
+    fontSize: 28,
+    fontWeight: '300',
   },
   title: {
     fontSize: 28,
