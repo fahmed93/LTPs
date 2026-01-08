@@ -1,11 +1,12 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const isDevelopment = process.env.NODE_ENV !== 'production';
-const publicPath = isDevelopment ? '/' : '/LTPs/';
+module.exports = (env, argv) => {
+  const isDevelopment = argv.mode !== 'production';
+  const publicPath = isDevelopment ? '/' : '/LTPs/';
 
-module.exports = {
-  mode: isDevelopment ? 'development' : 'production',
+  return {
+    mode: argv.mode || 'development',
   entry: './index.web.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -69,4 +70,5 @@ module.exports = {
       },
     },
   },
+  };
 };
