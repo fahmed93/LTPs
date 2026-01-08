@@ -145,6 +145,26 @@ function AppContent({
             </Pressable>
 
             <View style={[styles.featureCard, { backgroundColor: theme.cardBackground }]}>
+              <Text style={styles.featureIcon}>🍽️</Text>
+              <Text style={[styles.featureTitle, textStyle]}>
+                Restaurants
+              </Text>
+              <Text style={[styles.featureDescription, textStyle]}>
+                Track your favorite restaurants and dishes
+              </Text>
+            </View>
+
+            <View style={[styles.featureCard, { backgroundColor: theme.cardBackground }]}>
+              <Text style={styles.featureIcon}>🎬</Text>
+              <Text style={[styles.featureTitle, textStyle]}>
+                Media
+              </Text>
+              <Text style={[styles.featureDescription, textStyle]}>
+                Track movies and TV shows to watch, games to play
+              </Text>
+            </View>
+
+            <View style={[styles.featureCard, { backgroundColor: theme.cardBackground }]}>
               <Text style={styles.featureIcon}>✈️</Text>
               <Text style={[styles.featureTitle, textStyle]}>
                 Travel Plans & Memories

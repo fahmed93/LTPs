@@ -32,17 +32,31 @@ export const NAVIGATION_ITEMS: NavigationItem[] = [
     order: 3,
   },
   {
+    id: 'restaurants',
+    name: 'Restaurants',
+    icon: '🍽️',
+    route: 'Restaurants',
+    order: 4,
+  },
+  {
+    id: 'media',
+    name: 'Media',
+    icon: '🎬',
+    route: 'Media',
+    order: 5,
+  },
+  {
     id: 'travel',
     name: 'Travel',
     icon: '✈️',
     route: 'Travel',
-    order: 4,
+    order: 6,
   },
   {
     id: 'home-projects',
     name: 'Home Projects',
     icon: '🔨',
     route: 'HomeProjects',
-    order: 5,
+    order: 7,
   },
 ];
