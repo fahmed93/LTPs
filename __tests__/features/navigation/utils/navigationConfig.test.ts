@@ -7,8 +7,8 @@ import {NAVIGATION_ITEMS} from '../../../src/features/navigation/utils/navigatio
 
 describe('navigationConfig', () => {
   describe('NAVIGATION_ITEMS', () => {
-    it('should have exactly 5 navigation items', () => {
-      expect(NAVIGATION_ITEMS).toHaveLength(5);
+    it('should have exactly 7 navigation items', () => {
+      expect(NAVIGATION_ITEMS).toHaveLength(7);
     });
 
     it('should have all required features', () => {
@@ -16,6 +16,8 @@ describe('navigationConfig', () => {
       expect(featureIds).toContain('home');
       expect(featureIds).toContain('recipes');
       expect(featureIds).toContain('grocery-list');
+      expect(featureIds).toContain('restaurants');
+      expect(featureIds).toContain('media');
       expect(featureIds).toContain('travel');
       expect(featureIds).toContain('home-projects');
     });
@@ -34,7 +36,7 @@ describe('navigationConfig', () => {
 
     it('should have valid order values (1-based, sequential)', () => {
       const orders = NAVIGATION_ITEMS.map(item => item.order).sort((a, b) => a - b);
-      expect(orders).toEqual([1, 2, 3, 4, 5]);
+      expect(orders).toEqual([1, 2, 3, 4, 5, 6, 7]);
     });
 
     it('should have non-empty names for all items', () => {
