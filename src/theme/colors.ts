@@ -17,6 +17,14 @@ export const COLORS = {
     buttonText: '#000000',
     disabledBackground: '#e0e0e0',
     disabledText: '#999999',
+    // Navigation Sidebar colors
+    sidebarBackground: '#ffffff',
+    sidebarText: '#000000',
+    sidebarTextSecondary: '#666666',
+    sidebarHighlight: 'rgba(100, 150, 250, 0.15)',
+    sidebarHighlightText: '#000000',
+    sidebarOverlay: 'rgba(0, 0, 0, 0.4)',
+    sidebarBorder: '#E0E0E0',
   },
   dark: {
     background: '#1a1a1a',
@@ -31,6 +39,14 @@ export const COLORS = {
     buttonText: '#ffffff',
     disabledBackground: '#3a3a3a',
     disabledText: '#666666',
+    // Navigation Sidebar colors
+    sidebarBackground: '#2a2a2a',
+    sidebarText: '#ffffff',
+    sidebarTextSecondary: '#999999',
+    sidebarHighlight: 'rgba(100, 150, 250, 0.25)',
+    sidebarHighlightText: '#ffffff',
+    sidebarOverlay: 'rgba(0, 0, 0, 0.4)',
+    sidebarBorder: '#444444',
   },
 } as const;
 
